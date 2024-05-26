@@ -5,13 +5,15 @@ import { ALUMNOS, ICreateAlumnoPayload } from '../../models';
 import { telefonoValidator } from '../../../../../../shared/validators';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../../../../core/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, finalize } from 'rxjs';
 import { CURSOSxALUMNO } from '../../models';
 
 import { clasesService } from '../../../../../../core/services/clases.service';
 import { CLASES, iClasesAlumno } from '../../../clases/models';
 import { CURSOS } from '../../../cursos/models/index';
+import { CursosService } from '../../../../../../core/services/cursos.service';
 import { AlumnosService } from '../../../../../../core/services/alumnos.service';
+import { cursoFeature } from '../../../cursos/store/curso.reducer';
 
 
 @Component({
@@ -20,16 +22,18 @@ import { AlumnosService } from '../../../../../../core/services/alumnos.service'
   styleUrls: ['./student-dialog.component.scss'],
 })
 export class StudentDialogComponent implements OnInit, OnDestroy {
+  nombreDelCurso: string = "";
   studentForm: FormGroup;
   isAdmin: boolean | undefined;
   userData: Subscription = new Subscription();
-  cursosDisplayedColumns: string[] = ['id', 'clasesPresente', 'puntos', 'actions'];
+  cursosDisplayedColumns: string[] = ['id', 'nombreCurso', 'clasesPresente', 'puntos', 'actions'];
 
   clases: CLASES[] = [];
   ClasesAlumno: iClasesAlumno[] = [];
 
   cursosDataSource: CURSOSxALUMNO[] = [];
   IDClass: number = 1;
+  activatedRoute: any;
 
   constructor(
     private authService: AuthService,
@@ -37,6 +41,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     private matDialogRef: MatDialogRef<StudentDialogComponent>,
     public clasesService: clasesService,
     public AlumnosService: AlumnosService,
+    public CursosService: CursosService,
     @Inject(MAT_DIALOG_DATA) public editingUser: ALUMNOS
 
   ) {
@@ -173,12 +178,16 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
     });
   }
 
+
   onAgergarClase(){
     const claseIdSeleccionada = this.IDClass.toString();
     if (claseIdSeleccionada) {
       if (this.cursosDataSource) {
+
+
         this.cursosDataSource.push({
           idClass: claseIdSeleccionada,
+          nombreCurso: this.clases.find(curso => curso.id.toString() == claseIdSeleccionada)?.nombreCurso || "",
           clasesPresente: 0,
           puntos: 0,
         });
@@ -190,6 +199,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         });
 
         //his.cargarClases();
+
         this.editingUser.clases = this.cursosDataSource;
         console.log(this.editingUser.clases);
       } else {

@@ -8,7 +8,7 @@ import { CursosService } from '../../../../core/services/cursos.service';
 //import { AuthService } from '../../../../core/services/auth.service';
 import { Observable, Subscription, map } from 'rxjs';
 
-import { authRolLogin } from '../../../../store/auth/auth.selectors';
+import { authRolLogin } from '../../../../store/auth.selectors';
 import { Store } from '@ngrx/store';
 
 

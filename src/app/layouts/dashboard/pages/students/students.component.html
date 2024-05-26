@@ -3,12 +3,12 @@
 <ng-container *ngIf="!loading">
 
   <div class="d-flex justify-content-end mb-3">
-      <button (click)="openDialog()" mat-button color="primary" [disabled]="(rolLogin$ | async) !== 'admin'">
+      <button (click)="openDialog()" mat-button color="primary" [disabled]="!isAdmin">
         Nuevo Alumno
       </button>
     </div>
 
-    <table mat-table [dataSource]="(alumnos$ | async) || [] || getPaginatedStudents()" class="mat-elevation-z8">
+    <table mat-table [dataSource]="getPaginatedStudents()" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
@@ -72,7 +72,7 @@
           </button>
 
           <!-- *ngIf="userRoleSession === 'ADMIN'" -->
-          <button (click)="onDeleteUser(element.id)" mat-icon-button color="warn" [disabled]="(rolLogin$ | async) !== 'admin'">
+          <button (click)="onDeleteUser(element.id)" mat-icon-button color="warn" [disabled]="!isAdmin">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

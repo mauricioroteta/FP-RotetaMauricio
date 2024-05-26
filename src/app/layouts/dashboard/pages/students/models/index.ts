@@ -1,5 +1,6 @@
 export interface CURSOSxALUMNO {
   idClass: string;
+  nombreCurso: string;
   clasesPresente: number;
   puntos: number;
 }

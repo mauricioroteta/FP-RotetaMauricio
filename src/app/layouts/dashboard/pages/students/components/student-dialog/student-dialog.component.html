@@ -56,7 +56,7 @@
           <mat-label>Clases</mat-label>
           <mat-select (selectionChange)="onSeleccionarClase($event)">
             <mat-option *ngFor="let clase of clases" [value]="clase.id">
-              {{ clase.id }} - Fecha: {{ clase.fechaIni }} - Horario: {{ clase.horaIni }} - {{ clase.horaFin }}
+              {{ clase.id }} - {{ clase.nombreCurso }} - Fecha: {{ clase.fechaIni }} - Horario: {{ clase.horaIni }} - {{ clase.horaFin }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -85,6 +85,7 @@
             </mat-card-header>
             <mat-card-content>
               <p>Clases Presente: {{ clases.clasesPresente }}</p>
+              <p>Curso: {{ clases.nombreCurso }}</p>
               <div class="progress-container">
                 <div class="progress-bar" [style.width.%]="(clases.clasesPresente / 10) * 100"></div>
               </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, map, of, pipe } from 'rxjs';
+import { Observable, delay, firstValueFrom, map, of, pipe } from 'rxjs';
 import { CURSOS, ICreateCursoPayload } from '../../layouts/dashboard/pages/cursos/models';
 //import cursosJson from '../../../assets/cursos.json';
 import { HttpClient } from '@angular/common/http';
@@ -15,11 +15,15 @@ export class CursosService {
 
   constructor(private httpClient: HttpClient) {}
 
-  obtenerNombreCurso(idCurso: number): Observable<string> {
+  obtenerNombreCurso(idCurso: string): Observable<string> {
     return this.httpClient.get<{ curso: string }>(`${environment.baseAPIURL}/cursos/${idCurso}`)
       .pipe(
-        map(response => response.curso) // Extraemos el nombre del curso de la respuesta
+        map(response => response.curso)
       );
+  }
+
+  obtenerNombreCursoPromesa(idCurso: string): Promise<string> {
+    return firstValueFrom(this.obtenerNombreCurso(idCurso));
   }
 
   getCursos(): Observable<CURSOS[]> {

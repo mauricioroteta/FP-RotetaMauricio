@@ -4,7 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { USUARIOS } from '../../models';
 import { telefonoValidator } from '../../../../../../shared/validators';
 import { AuthService } from '../../../../../../core/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { authRolLogin } from '../../../../../../store/auth.selectors';
 
 @Component({
   selector: 'app-user-dialog',
@@ -16,14 +18,18 @@ export class userDialogComponent {
 
   isAdmin: boolean | undefined;
   userData: Subscription = new Subscription();
-
+  rolLogin$: Observable<string | null>;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
+    private store: Store,
     private matDialogRef: MatDialogRef<userDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private editingUser?: USUARIOS
   ) {
+    this.rolLogin$ = this.store.select(authRolLogin);
     this.userForm = this.formBuilder.group({
+      userName: [],
+      password: [],
       nombre: [
         '',
         [Validators.required, Validators.pattern('[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$')],
@@ -72,13 +78,13 @@ export class userDialogComponent {
     return this.userForm.get('avatar');
   }
 
-  ngOnInit(): void {
-    this.userData = this.authService.getUserData().subscribe((userData) => {
-      if (userData.rol === 'admin') {
-        this.isAdmin = true;
-      }
-    });
-  }
+  // ngOnInit(): void {
+  //   this.userData = this.authService.getUserData().subscribe((userData) => {
+  //     if (userData.rol === 'admin') {
+  //       this.isAdmin = true;
+  //     }
+  //   });
+  // }
 
   onSave(): void {
     if (this.userForm.invalid) {

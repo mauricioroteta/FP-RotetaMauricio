@@ -8,7 +8,7 @@ import { clasesService } from '../../../../core/services/clases.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Observable, Subscription, map } from 'rxjs';
 
-import { authRolLogin } from '../../../../store/auth/auth.selectors';
+import { authRolLogin } from '../../../../store/auth.selectors';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -58,28 +58,48 @@ export class ClasesComponent {
   }
 
 
-  openDialog(editingUser?: CLASES): void {
+  openDialog(editingClass?: CLASES): void {
     this.matDialog
       .open(ClaseDialogComponent, {
-        data: editingUser,
+        data: editingClass,
       })
       .afterClosed()
       .subscribe({
-        next: (result) => {
-          if (result) {
-            if (editingUser) {
-              this.clases = this.clases.map((u) =>
-              u.id === editingUser.id ? { ...u, ...result } : u
-              );
-            } else {
-              result.id = new Date().getTime().toString().substring(0, 3);
-              result.createAt = new Date();
-              this.clases = [...this.clases, result];
-            }
-          }
-        },
-      });
-  }
+  //       next: (result) => {
+  //         if (result) {
+  //           if (editingUser) {
+  //             this.clases = this.clases.map((u) =>
+  //             u.id === editingUser.id ? { ...u, ...result } : u
+  //             );
+  //           } else {
+  //             result.id = new Date().getTime().toString().substring(0, 3);
+  //             result.createAt = new Date();
+  //             this.clases = [...this.clases, result];
+  //           }
+  //         }
+  //       },
+  //     });
+  // }
+  next: (result) => {
+    if (result) {
+      if (editingClass) {
+        // ACTUALIZAR EL USUARIO EN EL ARRAY
+        this.clases = this.clases.map((u) =>
+          u.id === editingClass.id ? { ...u, ...result } : u
+        );
+      } else {
+        // LOGICA DE CREAR EL USUARIO
+        result.createdAt = new Date();
+        this.clasesService.createClase(result).subscribe({
+          next: (claseCreada) => {
+            this.clases = [...this.clases, claseCreada];
+          },
+        });
+      }
+    }
+  },
+});
+}
 
   onDeleteUser(id: number): void {
     Swal.fire({

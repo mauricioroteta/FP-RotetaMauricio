@@ -73,7 +73,7 @@
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let element">
         <button (click)="openDialog(element)" mat-icon-button color="primary">
-          <mat-icon *ngIf="isAdmin; else notAdmin">edit</mat-icon>
+          <mat-icon *ngIf="(rolLogin$ | async) == 'admin'; else notAdmin">edit</mat-icon>
           <ng-template #notAdmin>
             <mat-icon>visibility</mat-icon>
           </ng-template>

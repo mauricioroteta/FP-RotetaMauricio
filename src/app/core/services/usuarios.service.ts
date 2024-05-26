@@ -12,11 +12,11 @@ export class UsuariosService {
   constructor(private httpClient: HttpClient) {}
 
   getUsuarios(): Observable<USUARIOS[]> {
-    return this.httpClient.get<USUARIOS[]>(environment.baseAPIURL + '/usuarios');
+    return this.httpClient.get<USUARIOS[]>(environment.baseAPIURL + '/users');
   }
 
   obtenerUsuario(nombreUsuario: string): Observable<USUARIOS[]> {
-    return this.httpClient.get<USUARIOS[]>(environment.baseAPIURL + '/usuarios?userName=' + nombreUsuario);
+    return this.httpClient.get<USUARIOS[]>(environment.baseAPIURL + '/users?userName=' + nombreUsuario);
   }
 
   getUsuarioPorId(id: string): Observable<USUARIOS | undefined> {

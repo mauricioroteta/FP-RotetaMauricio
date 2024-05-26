@@ -5,15 +5,9 @@ import { StudentDialogComponent } from './components/student-dialog/student-dial
 import Swal from 'sweetalert2';
 import { AlumnosService } from '../../../../core/services/alumnos.service';
 
-//import { AuthService } from '../../../../core/services/auth.service';
-import { Observable, Subscription, map } from 'rxjs';
+import { AuthService } from '../../../../core/services/auth.service';
+import { Subscription } from 'rxjs';
 import { CLASES } from '../clases/models/index';
-
-import { authRolLogin } from '../../../../store/auth/auth.selectors';
-import { Store } from '@ngrx/store';
-import { AlumnoActions } from './store/alumno.actions';
-import { selectAlumnos, selectAlumnosError } from './store/alumno.selectors';
-
 
 @Component({
   selector: 'app-students',
@@ -38,20 +32,28 @@ export class StudentsComponent {
    isAdmin: boolean = false;
 
   students: ALUMNOS[] = [];
-  alumnos$: Observable<ALUMNOS[]>;
-  rolLogin$: Observable<string | null>;
-  error$: Observable<Error>;
+
   constructor(private matDialog: MatDialog,
-    private AlumnosService: AlumnosService, private store: Store) {
-      this.rolLogin$ = this.store.select(authRolLogin);
-      this.alumnos$ = this.store.select(selectAlumnos);
-      this.error$ = this.store
-        .select(selectAlumnosError)
-        .pipe(map((err) => err as Error));
-    }
+    private AlumnosService: AlumnosService, private authService: AuthService,) {}
 
   ngOnInit(): void {
-    this.store.dispatch(AlumnoActions.loadAlumnos());
+    this.loading = true;
+    this.userData = this.authService.getUserData().subscribe((userData) => {
+      if (userData.rol === 'admin') {
+        this.isAdmin = true;
+      }
+    });
+    this.AlumnosService.getAlumnos().subscribe({
+      next: (students) => {
+        this.students = students;
+      },
+      error: () => {
+        Swal.fire('Error', 'Ocurrio un error', 'error');
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    })
   }
 
   getAlumnos(): void {
@@ -135,7 +137,6 @@ export class StudentsComponent {
 
   // Cantidad de elementos por página
   pageSize: number = 6;
-
   goToFirstPage(): void {
     this.p = 1;
   }

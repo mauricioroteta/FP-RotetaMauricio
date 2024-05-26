@@ -9,11 +9,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
-import { EffectsModule } from '@ngrx/effects';
-import { AlumnoEffects } from './store/alumno.effects';
-import { StoreModule } from '@ngrx/store';
-import { alumnoFeature } from './store/alumno.reducer';
-
 @NgModule({
   declarations: [
     StudentsComponent,
@@ -25,9 +20,7 @@ import { alumnoFeature } from './store/alumno.reducer';
     SharedModule,
     MatCardModule,
     MatGridListModule,
-    MatProgressBarModule,
-    StoreModule.forFeature(alumnoFeature),
-    EffectsModule.forFeature([AlumnoEffects])
+    MatProgressBarModule
   ],
   exports: [StudentsComponent]
 })

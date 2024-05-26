@@ -3,10 +3,10 @@ import { USUARIOS } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { userDialogComponent } from './components/user-dialog/user-dialog.component';
 import Swal from 'sweetalert2';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription, filter, map, switchMap, take } from 'rxjs';
 import { UsuariosService } from '../../../../core/services/usuarios.service';
 
-import { authRolLogin } from '../../../../store/auth/auth.selectors';
+import { authRolLogin } from '../../../../store/auth.selectors';
 import { Store } from '@ngrx/store';
 
 import { selectUsuario, selectUsuarios, selectUsuariosLoading } from './store/usuario.selectors';
@@ -61,41 +61,73 @@ export class usersComponent implements OnInit{
 
   openDialog(editingUser?: USUARIOS): void {
     this.matDialog
-      .open(userDialogComponent, {
-        data: editingUser,
-      })
-      .afterClosed()
-      .subscribe({
-        next: (result) => {
-          if (result) {
-            if (editingUser) {
-              this.users = this.users.map((u) =>
-                u.id === editingUser.id ? { ...u, ...result } : u
-              );
-            } else {
-              result.id = new Date().getTime().toString().substring(0, 3);
-              result.createAt = new Date();
-              this.users = [...this.users, result];
-            }
+    .open(userDialogComponent, {
+      data: editingUser,
+    })
+    .afterClosed()
+    .subscribe({
+      next: (result) => {
+        if (result) {
+          if (editingUser) {
+            this.store.dispatch(
+              UsuarioActions.updateUsuario({
+                id: editingUser.id.toString(),
+                payload: result,
+              })
+            );
+          } else {
+            this.store.dispatch(
+              UsuarioActions.createUsuario({ payload: result })
+            );
           }
-        },
-      });
+        }
+      },
+    });
+    // this.matDialog
+    //   .open(userDialogComponent, {
+    //     data: editingUser,
+    //   })
+    //   .afterClosed()
+    //   .subscribe({
+    //     next: (result) => {
+    //       if (result) {
+    //         if (editingUser) {
+    //           this.users = this.users.map((u) =>
+    //             u.id === editingUser.id ? { ...u, ...result } : u
+    //           );
+    //         } else {
+    //           result.id = new Date().getTime().toString().substring(0, 3);
+    //           result.createAt = new Date();
+    //           this.users = [...this.users, result];
+    //         }
+    //       }
+    //     },
+    //   });
   }
 
-  onDeleteUser(id: number): void {
-    Swal.fire({
-      title: '¿Está seguro?',
-      text: 'El registro se eliminara permanentemente',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.users = this.users.filter((u) => u.id !== id);
-        Swal.fire('¡Eliminado!', 'El usuario ha sido eliminado.', 'success');
+  onDeleteUser(id: string): void {
+    this.store.dispatch(UsuarioActions.loadUsuarioPorId({ id }));
+
+    this.loading$.pipe(
+      filter(loading => !loading),
+      take(1),
+      switchMap(() => this.usuario$.pipe(take(1)))
+    ).subscribe(usuario => {
+        Swal.fire({
+          title: '¿Está seguro de eliminar el usuario?',
+          icon: 'warning',
+          showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.store.dispatch(UsuarioActions.deleteUsuario({ id }));
+            Swal.fire({
+              title: 'Usuario eliminado',
+              icon: 'success',
+            });
+          }
+        });
       }
-    });
+    );
   }
 
   getPageNumbers(): number[] {
