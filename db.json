@@ -47,9 +47,15 @@
       "clases": [
         {
           "idClass": "1",
-          "nombreCurso": "Curso",
-          "clasesPresente": 0,
-          "puntos": 0
+          "nombreCurso": "Angular",
+          "clasesPresente": 5,
+          "puntos": 30
+        },
+        {
+          "idClass": "3",
+          "nombreCurso": "Python",
+          "clasesPresente": 8,
+          "puntos": 80
         }
       ],
       "id": "1"
@@ -390,6 +396,12 @@
       "clases": [
         {
           "idClass": "1",
+          "nombreCurso": "Angular",
+          "clasesPresente": 0,
+          "puntos": 0
+        },
+        {
+          "idClass": "2",
           "nombreCurso": "Angular",
           "clasesPresente": 0,
           "puntos": 0

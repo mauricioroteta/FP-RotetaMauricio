@@ -16,6 +16,20 @@ import { RouterOutlet } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './store/auth.reducer';
+import { MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+
+
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -30,6 +44,7 @@ import { authReducer } from './store/auth.reducer';
     FlexLayoutModule,
     HttpClientModule,
 
+
     CommonModule,
     RouterOutlet,
     DashboardModule,
@@ -41,7 +56,8 @@ import { authReducer } from './store/auth.reducer';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
   ],
   bootstrap: [AppComponent]
 })

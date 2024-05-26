@@ -201,7 +201,7 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
         //his.cargarClases();
 
         this.editingUser.clases = this.cursosDataSource;
-        console.log(this.editingUser.clases);
+
       } else {
         console.error('editingUser o clases no está definido');
       }

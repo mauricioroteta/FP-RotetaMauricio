@@ -4,6 +4,7 @@ import { catchError, map, concatMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UsuarioActions } from './usuario.actions';
 import { UsuariosService } from '../../../../../core/services/usuarios.service';
+import { USUARIOS } from '../models/index';
 
 
 @Injectable()
@@ -69,6 +70,19 @@ export class UsuarioEffects {
         this.usuariosService.getUsuarioPorId(action.id).pipe(
           map(data => UsuarioActions.loadUsuarioPorIdSuccess({data: data || null})),
           catchError(error => of(UsuarioActions.loadUsuarioPorIdFailure({ error }))))
+        )
+      );
+    });
+
+    loadUsuarioPorNombre$ = createEffect(() => {
+      return this.actions$.pipe(
+
+        ofType(UsuarioActions.loadUsuarioPorNombre),
+        concatMap((action) =>
+
+          this.usuariosService.obtenerUsuario(action.nombreUsuario).pipe(
+            map(data => UsuarioActions.loadUsuarioPorNombreSuccess({data: data || null})),
+            catchError(error => of(UsuarioActions.loadUsuarioPorNombreFailure({ error }))))
         )
       );
     });

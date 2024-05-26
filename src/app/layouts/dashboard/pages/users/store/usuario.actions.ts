@@ -24,5 +24,9 @@ export const UsuarioActions = createActionGroup({
     'Load Usuario por Id':props<{ id: string }>(),
     'Load Usuario Por Id Success': props<{ data: USUARIOS | null }>(),
     'Load Usuario Por Id Failure': props<{ error: any }>(),
+
+    'Load Usuario por Nombre':props<{ nombreUsuario: string }>(),
+    'Load Usuario Por Nombre Success': props<{ data: USUARIOS[] | null }>(),
+    'Load Usuario Por Nombre Failure': props<{ error: any }>(),
   }
 });

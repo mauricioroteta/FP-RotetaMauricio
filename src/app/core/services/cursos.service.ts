@@ -39,7 +39,7 @@ export class CursosService {
   }
 
   updateCurso(id: string, payload: ICreateCursoPayload) {
-    console.log(environment.baseAPIURL + '/cursos/' + id + " " + payload)
+
     return this.httpClient.put<CURSOS>(environment.baseAPIURL + '/cursos/' + id, payload)
   }
 

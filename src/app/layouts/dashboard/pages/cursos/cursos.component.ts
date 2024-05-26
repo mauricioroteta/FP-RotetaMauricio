@@ -120,6 +120,9 @@ export class CursosComponent {
     });
   }
 
+  onListaAlumnos(id: string): void {
+
+  }
 
   getPageNumbers(): number[] {
     const pageCount = Math.ceil(this.Cursos.length / this.pageSize);

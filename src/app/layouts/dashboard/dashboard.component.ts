@@ -11,6 +11,13 @@ import { LoginModule } from '../login/login.module';
 import { authIsLogin, authUserLogin, authRolLogin, authAvatarLogin } from '../../store/auth.selectors';
 import { Store } from '@ngrx/store';
 
+import { userDialogComponent } from '../dashboard/pages/users/components/user-dialog/user-dialog.component';
+import { USUARIOS } from '../dashboard/pages/users/models';
+import { selectUsuario, selectUsuarios, selectUsuariosLoading } from '../dashboard/pages/users/store/usuario.selectors';
+import { selectCursosError } from '../dashboard/pages/cursos/store/curso.selectors';
+import { UsuarioActions } from '../dashboard/pages/users/store/usuario.actions';
+import { MatDialog } from '@angular/material/dialog';
+
 interface UserData {
   usuario: string;
   rol: string;
@@ -33,6 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userData: Subscription = new Subscription();
   isAdmin: boolean = false;
   userName: string | null= '';
+  user: string | null= '';
   rol: string | null= '';
   avatar: string | null= '';
 
@@ -61,7 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return window.innerWidth <= 600;
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService,
+  constructor(private matDialog: MatDialog, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService,
     private store: Store
   ) {
       this.isLogin$ = this.store.select(authIsLogin);
@@ -74,6 +82,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.userName = localStorage.getItem('nombre');
       this.rol = localStorage.getItem('rol');
       this.avatar = localStorage.getItem('avatar');
+      this.user = localStorage.getItem('user');
 
       if (localStorage.getItem('user')) {
         this.isAuthenticated = true;
@@ -87,6 +96,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
+  }
+
+
+  usrInfo(editingUser?: USUARIOS): void {
+    var nombreUsuario = "admin";
+    this.store.dispatch(UsuarioActions.loadUsuarioPorNombre({ nombreUsuario }))
+      console.log(nombreUsuario)
+      this.matDialog
+      .open(userDialogComponent, {
+        data: editingUser,
+      })
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            if (editingUser) {
+              this.store.dispatch(
+                UsuarioActions.updateUsuario({
+                  id: editingUser.id.toString(),
+                  payload: result,
+                })
+              );
+            }
+          }
+        },
+      });
   }
 
   ngOnInit(): void {

@@ -132,6 +132,27 @@ on(UsuarioActions.loadUsuarioPorIdFailure, (state, action) => {
     loading: false,
     error: action.error,
   };
+}),
+
+// Load Usuario por Nombre
+on(UsuarioActions.loadUsuarioPorNombre, (state) => {
+  return {
+    ...state,
+    loading: true,
+  }
+}),
+on(UsuarioActions.loadUsuarioPorNombreSuccess, (state) => {
+  return {
+    ...state,
+    loading: false,
+  };
+}),
+on(UsuarioActions.loadUsuarioPorNombreFailure, (state, action) => {
+  return {
+    ...state,
+    loading: false,
+    error: action.error,
+  };
 })
 
 );

@@ -3,6 +3,12 @@
   align-items: center; /* Centra verticalmente los elementos */
 }
 
+.Progress-text{
+  font-size: 0.7em; /* Tamaño de la fuente del título */
+  font-weight: bold; /* Negrita */
+  font-style: italic;
+}
+
 .input-field {
   flex: 1; /* El campo de entrada tomará todo el espacio disponible */
 }
@@ -45,6 +51,9 @@
   box-shadow: 0 0 5px 5px rgba(10, 0, 255, 0.5);
 }
 
+.mat-mdc-card-content:last-child {
+  padding-bottom: 50px;
+}
 
 /* app.component.css */
 .cards-container {

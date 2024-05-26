@@ -20,3 +20,39 @@ body {
   display: block;
   margin: 0 auto; /* Centra horizontalmente la imagen dentro de su contenedor */
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.card h1, .card h2 {
+  color: #333;
+}
+.card p {
+  color: #666;
+  line-height: 1.6;
+}
+.card ul {
+  list-style-type: none;
+  padding: 0;
+}
+.card ul li {
+  background: #eaeaea;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+}
