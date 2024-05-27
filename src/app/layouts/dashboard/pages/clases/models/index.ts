@@ -6,8 +6,8 @@ export interface iClasesAlumno {
 }
 
 export interface CLASES {
-  id: number;
-  idCurso: number;
+  id: string;
+  idCurso: string;
   nombreCurso: string;
   fechaIni: Date;
   horaIni:  string;

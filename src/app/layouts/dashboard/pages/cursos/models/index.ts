@@ -13,3 +13,7 @@ export interface CURSOS {
     dificultad: string | null;
     descripcion: string | null;
   }
+
+  export interface ListaCursos {
+    curso: string;
+  }

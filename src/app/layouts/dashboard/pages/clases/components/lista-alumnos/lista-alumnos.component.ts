@@ -11,23 +11,16 @@ import { CursosService } from './../../../../../../core/services/cursos.service'
 import { ListaCursos } from './../../../cursos/models';
 
 @Component({
-  selector: 'app-Clase-dialog',
-  templateUrl: './Clase-dialog.component.html',
-  styleUrl: './clase-dialog.component.scss',
+  selector: 'app-lista-alumnos',
+  templateUrl: './lista-alumnos.component.html',
+  styleUrl: './lista-alumnos.component.scss'
 })
-
-export class ClaseDialogComponent {
-  Curso: string[] = [];
-
+export class ListaAlumnosComponent {
   ClaseForm: FormGroup;
-
-  isAdmin: boolean | undefined;
-  userData: Subscription = new Subscription();
-
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private matDialogRef: MatDialogRef<ClaseDialogComponent>,
+    private matDialogRef: MatDialogRef<ListaAlumnosComponent>,
     private CursosService: CursosService,
     @Inject(MAT_DIALOG_DATA) private editingUser?: CLASES,
   ) {
@@ -82,17 +75,7 @@ export class ClaseDialogComponent {
   }
 
   ngOnInit(): void {
-    this.userData = this.authService.getUserData().subscribe((userData) => {
-      if (userData.rol === 'admin') {
-        this.isAdmin = true;
-      }
-    });
-    this.CursosService.getListaCursos().subscribe({
-      next: (curso) => {
 
-        this.Curso = curso;
-      }
-    });
   }
 
 }

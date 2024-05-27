@@ -150,9 +150,9 @@ export class StudentDialogComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        //console.log(this.cursosDataSource)
+
         this.cursosDataSource = this.cursosDataSource.filter(clase => clase.idClass.toString() !== id);
-        //console.log(this.cursosDataSource)
+
         this.editingUser.clases = this.editingUser.clases.filter(clase => clase.idClass.toString() !== id);
         this.editingUser.clases = this.cursosDataSource;
 

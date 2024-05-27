@@ -46,16 +46,10 @@
       "activo": true,
       "clases": [
         {
-          "idClass": "1",
-          "nombreCurso": "Angular",
-          "clasesPresente": 5,
-          "puntos": 30
-        },
-        {
           "idClass": "3",
           "nombreCurso": "Python",
-          "clasesPresente": 8,
-          "puntos": 80
+          "clasesPresente": 0,
+          "puntos": 0
         }
       ],
       "id": "1"
@@ -69,7 +63,8 @@
       "activo": true,
       "clases": [
         {
-          "idClass": "1",
+          "idClass": "3",
+          "nombreCurso": "Python",
           "clasesPresente": 0,
           "puntos": 0
         }
@@ -405,6 +400,12 @@
           "nombreCurso": "Angular",
           "clasesPresente": 0,
           "puntos": 0
+        },
+        {
+          "idClass": "8a2f",
+          "nombreCurso": "Next.js",
+          "clasesPresente": 0,
+          "puntos": 0
         }
       ],
       "id": "3a05"
@@ -494,28 +495,44 @@
   ],
   "clases": [
     {
-      "id": "1",
-      "idCurso": 1,
+      "idCurso": "1",
       "nombreCurso": "Angular",
-      "fechaIni": "2024-06-01T00:00:00Z",
+      "fechaIni": "01/01/2023",
       "horaIni": "20:30",
-      "horaFin": "22:30"
+      "horaFin": "22:30",
+      "id": "1"
     },
     {
-      "id": "2",
-      "idCurso": 1,
-      "nombreCurso": "Angular",
-      "fechaIni": "2024-06-15T00:00:00Z",
+      "idCurso": "1",
+      "nombreCurso": "Fundamentos del Diseño Gráfico",
+      "fechaIni": "01/01/2023",
       "horaIni": "20:30",
-      "horaFin": "22:30"
+      "horaFin": "22:30",
+      "id": "2"
     },
     {
-      "id": "3",
-      "idCurso": 2,
+      "idCurso": "2",
       "nombreCurso": "Python",
-      "fechaIni": "2024-06-02T00:00:00Z",
+      "fechaIni": "01/01/2023",
       "horaIni": "21:30",
-      "horaFin": "23:30"
+      "horaFin": "23:30",
+      "id": "3"
+    },
+    {
+      "idCurso": null,
+      "nombreCurso": "Next.js",
+      "fechaIni": "01/01/2023",
+      "horaIni": "11:11",
+      "horaFin": "22:22",
+      "id": "8a2f"
+    },
+    {
+      "idCurso": null,
+      "nombreCurso": "Canva",
+      "fechaIni": "01/01/2023",
+      "horaIni": "10:30",
+      "horaFin": "11:30",
+      "id": "ea1e"
     }
   ]
 }

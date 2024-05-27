@@ -127,19 +127,6 @@ export class AuthService {
     );
   }
 
-  // getUserData(): Observable<any> {
-  //   console.log("getUserData");
-  //   const user = localStorage.getItem('user');
-  //   const rol = localStorage.getItem('rol');
-  //   const nombreUsuario = localStorage.getItem('nombre');
-  //   const avatar = localStorage.getItem('avatar');
-  //   if (user && rol) {
-  //     console.log("usuario = " + user)
-  //     this.userDataSubject.next({ usuario: user, rol: rol, nombre: nombreUsuario, avatar: avatar });
-  //   }
-  //   return this.userDataSubject.asObservable();
-  // }
-
   logout(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('rol');

@@ -8,11 +8,13 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
 
 @NgModule({
   declarations: [
     ClasesComponent,
-    ClaseDialogComponent
+    ClaseDialogComponent,
+    ListaAlumnosComponent
   ],
   imports: [
     CommonModule,

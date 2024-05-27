@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   usrInfo(editingUser?: USUARIOS): void {
     var nombreUsuario = "admin";
     this.store.dispatch(UsuarioActions.loadUsuarioPorNombre({ nombreUsuario }))
-      console.log(nombreUsuario)
+
       this.matDialog
       .open(userDialogComponent, {
         data: editingUser,

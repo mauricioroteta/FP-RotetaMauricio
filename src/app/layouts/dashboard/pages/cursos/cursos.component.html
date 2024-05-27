@@ -70,11 +70,6 @@
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let element">
 
-        <!-- Ver Grupo de alumnos -->
-        <button (click)="onListaAlumnos(element.id)" mat-icon-button color="primary">
-          <mat-icon>groups</mat-icon>
-        </button>
-
         <button (click)="openDialog(element)" mat-icon-button color="primary">
           <mat-icon *ngIf="(rolLogin$ | async) == 'admin'; else notAdmin"
             >edit</mat-icon

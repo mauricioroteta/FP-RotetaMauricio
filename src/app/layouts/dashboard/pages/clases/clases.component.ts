@@ -2,8 +2,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { CLASES } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { ClaseDialogComponent } from './components/clase-dialog/clase-dialog.component';
+import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.component';
 import Swal from 'sweetalert2';
 import { clasesService } from '../../../../core/services/clases.service';
+import { AlumnosService } from '../../../../core/services/alumnos.service';
 
 import { AuthService } from '../../../../core/services/auth.service';
 import { Observable, Subscription, map } from 'rxjs';
@@ -19,7 +21,7 @@ import { Store } from '@ngrx/store';
 export class ClasesComponent {
   displayedColumns: string[] = [
     'id',
-    'NombreCurso',
+    'nombreCurso',
     'fechaIni',
     'horaIni',
     'horaFin',
@@ -32,8 +34,11 @@ export class ClasesComponent {
   isAdmin: boolean = false;
 
   clases: CLASES[] = [];
+  alumnosByCurso: string[] = [];
 
-  constructor(private matDialog: MatDialog, private clasesService: clasesService, private authService: AuthService, private store: Store) {
+  constructor(private matDialog: MatDialog,
+    private AlumnosService: AlumnosService,
+    private clasesService: clasesService, private authService: AuthService, private store: Store) {
     this.rolLogin$ = this.store.select(authRolLogin);
   }
 
@@ -57,51 +62,62 @@ export class ClasesComponent {
     })
   }
 
-
-  openDialog(editingClass?: CLASES): void {
-    this.matDialog
-      .open(ClaseDialogComponent, {
-        data: editingClass,
-      })
-      .afterClosed()
-      .subscribe({
-  //       next: (result) => {
-  //         if (result) {
-  //           if (editingUser) {
-  //             this.clases = this.clases.map((u) =>
-  //             u.id === editingUser.id ? { ...u, ...result } : u
-  //             );
-  //           } else {
-  //             result.id = new Date().getTime().toString().substring(0, 3);
-  //             result.createAt = new Date();
-  //             this.clases = [...this.clases, result];
-  //           }
-  //         }
-  //       },
-  //     });
-  // }
-  next: (result) => {
-    if (result) {
-      if (editingClass) {
-        // ACTUALIZAR EL USUARIO EN EL ARRAY
-        this.clases = this.clases.map((u) =>
-          u.id === editingClass.id ? { ...u, ...result } : u
-        );
-      } else {
-        // LOGICA DE CREAR EL USUARIO
-        result.createdAt = new Date();
-        this.clasesService.createClase(result).subscribe({
-          next: (claseCreada) => {
-            this.clases = [...this.clases, claseCreada];
-          },
-        });
-      }
-    }
-  },
-});
+openDialog(editingClass?: CLASES): void {
+  this.matDialog
+    .open(ClaseDialogComponent, {
+      data: editingClass,
+    })
+    .afterClosed()
+    .subscribe({
+      next: (result) => {
+        if (result) {
+          if (editingClass) {
+            this.clasesService.updateClase(editingClass.id.toString(), result).subscribe({
+              next: (data) => {
+                this.clases.push(data);
+                this.getClases();
+              },
+            });
+          } else {
+            this.clasesService.createClase(result).subscribe({
+              next: (data) => {
+                this.clases.push(data);
+                this.getClases();
+              },
+            });
+          }
+        }
+      },
+    });
 }
 
-  onDeleteUser(id: number): void {
+getClases(): void {
+  this.clasesService.getClases().subscribe({
+    next: (data) => {
+      this.clases = data;
+    },
+  });
+}
+
+mostrarAlumnosEnSweetAlert(nombreCurso: string) {
+  Swal.fire({
+    title: 'Alumnos en el curso de ' + nombreCurso,
+    html: `<ul>${this.alumnosByCurso.map(nombre => `<li>${nombre}</li>`).join('')}</ul>`,
+    icon: 'info',
+    confirmButtonText: 'OK'
+  });
+}
+
+
+onListaAlumnos(nombreCurso: string): void {
+  this.AlumnosService.getAlumnosByCurso(nombreCurso).subscribe((nombres) => {
+    this.alumnosByCurso = nombres;
+    this.mostrarAlumnosEnSweetAlert(nombreCurso);
+  });
+}
+
+
+  onDeleteUser(id: string): void {
     Swal.fire({
       title: '¿Está seguro?',
       text: 'El registro se eliminara permanentemente',
@@ -111,7 +127,13 @@ export class ClasesComponent {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.clases = this.clases.filter((u) => u.id !== id);
+        this.clasesService.deleteClase(id).subscribe((data) => {
+          Swal.fire({
+            title: 'Clase eliminado',
+            icon: 'success',
+          });
+          this.clases = this.clases.filter(clase => clase.id !== id);
+        });
         Swal.fire('¡Eliminado!', 'El Clase ha sido eliminada.', 'success');
       }
     });

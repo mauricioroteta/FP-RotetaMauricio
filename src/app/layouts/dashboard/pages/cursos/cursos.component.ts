@@ -69,14 +69,14 @@ export class CursosComponent {
               this.CursosService.updateCurso(editingUser.id, result).subscribe({
                 next: (data) => {
                   this.Cursos.push(data);
-                  this.getCursos();
+                  //this.getCursos();
                 },
               });
             } else {
               this.CursosService.createCurso(result).subscribe({
                 next: (data) => {
                   this.Cursos.push(data);
-                  this.getCursos();
+                  //this.getCursos();
                 },
 
               });
@@ -86,13 +86,7 @@ export class CursosComponent {
       });
   }
 
-  getCursos(): void {
-    this.CursosService.getCursos().subscribe({
-      next: (data) => {
-        this.Cursos = data;
-      },
-    });
-  }
+
 
   onDeleteUser(id: string): void {
     Swal.fire({

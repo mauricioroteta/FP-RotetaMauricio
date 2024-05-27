@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, delay, firstValueFrom, map, of, pipe } from 'rxjs';
-import { CURSOS, ICreateCursoPayload } from '../../layouts/dashboard/pages/cursos/models';
+import { CURSOS, ICreateCursoPayload, ListaCursos } from '../../layouts/dashboard/pages/cursos/models';
 //import cursosJson from '../../../assets/cursos.json';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -28,6 +28,12 @@ export class CursosService {
 
   getCursos(): Observable<CURSOS[]> {
     return this.httpClient.get<CURSOS[]>(environment.baseAPIURL + '/cursos');
+  }
+
+  getListaCursos(): Observable<string[]> {
+    return  this.httpClient.get<CURSOS[]>(environment.baseAPIURL+ '/cursos').pipe(
+      map(cursos => cursos.map(curso => curso.curso))
+    );
   }
 
   createCurso(payload: ICreateCursoPayload) {

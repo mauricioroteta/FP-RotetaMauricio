@@ -24,6 +24,10 @@ export class clasesService {
     return this.httpClient.get<CLASES[]>(environment.baseAPIURL + '/clases');
   }
 
+  getNombreClases(): Observable<CLASES[]> {
+    return this.httpClient.get<CLASES[]>(environment.baseAPIURL + '/clases');
+  }
+
   //  getClasesByUser(userID: number): CLASES | undefined {
   //   return this.clases.find(usuario => usuario.id === userID);
   // }
@@ -40,6 +44,14 @@ export class clasesService {
       environment.baseAPIURL + '/clases',
       payload
     );
+  }
+
+  deleteClase(id: string) {
+    return this.httpClient.delete<CLASES>(environment.baseAPIURL + '/clases/' + id);
+  }
+
+  updateClase(id: string, payload: ICreateClasePayload) {
+    return this.httpClient.put<CLASES>(environment.baseAPIURL + '/clases/' + id, payload)
   }
 
 }
