@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ClasesComponent } from './clases.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../../../../shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('ClasesComponent', () => {
   let component: ClasesComponent;
@@ -8,7 +12,11 @@ describe('ClasesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ClasesComponent]
+      declarations: [ClasesComponent],
+      imports: [HttpClientModule, SharedModule, BrowserAnimationsModule, StoreModule.forRoot({})],
+      providers: [
+        provideMockStore(), // Proveer el MockStore
+      ]
     })
     .compileComponents();
 
@@ -17,7 +25,8 @@ describe('ClasesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Debe crearse', () => {
     expect(component).toBeTruthy();
   });
+
 });
