@@ -46,6 +46,18 @@
       "activo": true,
       "clases": [
         {
+          "idClass": "1",
+          "nombreCurso": "Angular",
+          "clasesPresente": 0,
+          "puntos": 0
+        },
+        {
+          "idClass": "2",
+          "nombreCurso": "Fundamentos del Diseño Gráfico",
+          "clasesPresente": 0,
+          "puntos": 0
+        },
+        {
           "idClass": "3",
           "nombreCurso": "Python",
           "clasesPresente": 0,

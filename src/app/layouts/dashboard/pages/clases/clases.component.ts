@@ -13,6 +13,7 @@ import { Observable, Subscription, map } from 'rxjs';
 import { authRolLogin } from '../../../../store/auth.selectors';
 import { Store } from '@ngrx/store';
 
+
 @Component({
   selector: 'app-Clases',
   templateUrl: './Clases.component.html',
@@ -38,7 +39,8 @@ export class ClasesComponent {
 
   constructor(private matDialog: MatDialog,
     private AlumnosService: AlumnosService,
-    private clasesService: clasesService, private authService: AuthService, private store: Store) {
+    private clasesService: clasesService, private authService: AuthService, private store: Store,
+    public dialog: MatDialog) {
     this.rolLogin$ = this.store.select(authRolLogin);
   }
 
@@ -112,7 +114,11 @@ mostrarAlumnosEnSweetAlert(nombreCurso: string) {
 onListaAlumnos(nombreCurso: string): void {
   this.AlumnosService.getAlumnosByCurso(nombreCurso).subscribe((nombres) => {
     this.alumnosByCurso = nombres;
-    this.mostrarAlumnosEnSweetAlert(nombreCurso);
+    this.dialog.open(ListaAlumnosComponent, {
+      data: {
+        alumnos: nombres
+      }
+    });
   });
 }
 
