@@ -50,5 +50,9 @@
         </div>
 
       </form>
+
+      <p *ngIf="loginError" class="error-message">
+        Usuario o Password inválidos.
+      </p>
     </div>
 </div>
