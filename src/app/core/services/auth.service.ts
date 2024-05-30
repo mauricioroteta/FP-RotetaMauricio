@@ -9,7 +9,6 @@ import { Store } from '@ngrx/store';
 import { authIsLogin, authUserLogin, authRolLogin, authAvatarLogin } from '../../store/auth.selectors';
 import { authActions } from '../../store/auth.actions';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -137,14 +136,6 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
     return this.isLogin$;
-  }
-
-  loginGoogle(): void {
-    Swal.fire({
-      title: "Error!",
-      text: "Usuario o password incorrecto",
-      icon: "error"
-    })
   }
 
 }
