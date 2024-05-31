@@ -392,35 +392,6 @@
       "activo": true,
       "clases": [],
       "id": "28"
-    },
-    {
-      "nombre": "wwwwwwwwwww",
-      "apellido": "wwwwwwwwwwwwwwww",
-      "email": "wwwwwwwwwwww@www.ww",
-      "telefono": "13212315456",
-      "avatar": "https://cdn-icons-png.flaticon.com/128/16/16612.png",
-      "activo": true,
-      "clases": [
-        {
-          "idClass": "1",
-          "nombreCurso": "Angular",
-          "clasesPresente": 0,
-          "puntos": 0
-        },
-        {
-          "idClass": "2",
-          "nombreCurso": "Angular",
-          "clasesPresente": 0,
-          "puntos": 0
-        },
-        {
-          "idClass": "8a2f",
-          "nombreCurso": "Next.js",
-          "clasesPresente": 0,
-          "puntos": 0
-        }
-      ],
-      "id": "3a05"
     }
   ],
   "cursos": [

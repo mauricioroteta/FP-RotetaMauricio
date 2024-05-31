@@ -1,5 +1,6 @@
-import { Component, Inject, Input } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ALUMNOS } from '../../../../../../layouts/dashboard/pages/students/models';
 
 @Component({
   selector: 'app-lista-alumnos',
@@ -7,6 +8,14 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./lista-alumnos.component.scss']
 })
 export class ListaAlumnosComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { alumnos: string[] }) {}
-  displayedColumns: string[] = ['nombre'];
+  displayedColumns: string[] = ['avatar', 'nombre', 'apellido', 'telefono', 'email'];
+
+  constructor(
+    public dialogRef: MatDialogRef<ListaAlumnosComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { alumnos: ALUMNOS[] }
+  ) {}
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
 }

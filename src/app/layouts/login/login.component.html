@@ -1,58 +1,46 @@
-<br>
-<h1></h1>
-<div class="text-center card container col-md-3">
-    <div class="mt-5 mb-5">
-        <img src="../../../assets/coderhouse.jpeg" alt="Logo Side" class="mb-4 imglogo"/>
-        <h1 class="h3 mb-3 fw-normal">Log In</h1>
-        <form (ngSubmit)="login()">
-        <div class="form-floating">
-            <input
-              matInput
-              type="text" class="form-control" id="floatingInput" placeholder="Usuario"
-              name="username"
-              [(ngModel)]="username"
-              required
-              class="form-control" id="floatingInput"
-            />
-            <label for="floatingInput">Usuario</label>
-        </div>
-        <div class="form-floating mt-1">
-            <input
-              matInput
-              type="password" class="form-control" id="floatingPassword" placeholder="Password"
-              name="password"
-              [(ngModel)]="password"
-              required
-            />
-            <label for="floatingPassword">Password</label>
-        </div>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button
-          class="w-100 btn btn-lg btn-primary"
-          type="submit"
-          [disabled]="!username || !password">
-            Sign in
-        </button>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg col-md-4">
+      <div class="text-center">
+          <img src="../../../assets/coderhouse.jpeg" alt="Logo" class="mb-4 imglogo"/>
 
-        <!-- <div class="or-container">
-            <div class="line-separator"></div>
-            <div class="or-label">or</div>
-            <div class="line-separator"></div>
-        </div>
-        <div class="row">
-            <button class="btn btn-lg btn-google btn-block text-uppercase btn-outline">
-                <img src="https://img.icons8.com/color/22/000000/google-logo.png"> Sing in Google
-            </button>
-        </div> -->
+      </div>
+      <form (ngSubmit)="login()">
+          <div class="form-floating mb-3">
+              <input
+                  matInput
+                  type="text"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="Usuario"
+                  name="username"
+                  [(ngModel)]="username"
+                  required
+              />
+              <label for="floatingInput">Usuario</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input
+                  matInput
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  placeholder="Password"
+                  name="password"
+                  [(ngModel)]="password"
+                  required
+              />
+              <label for="floatingPassword">Password</label>
+          </div>
 
+          <button
+              class="w-100 btn btn-lg btn-primary"
+              type="submit"
+              [disabled]="!username || !password">
+              Login
+          </button>
       </form>
-
-      <p *ngIf="loginError" class="error-message">
-        Usuario o Password inválidos.
+      <p *ngIf="loginError" class="text-danger mt-3">
+          Usuario o Password inválidos.
       </p>
-    </div>
+  </div>
 </div>

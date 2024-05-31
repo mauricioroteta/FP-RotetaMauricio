@@ -49,14 +49,13 @@ export class AlumnosService {
   }
 
     // Método para obtener nombres de alumnos que tienen un curso específico
-    getAlumnosByCurso(nombreCurso: string): Observable<string[]> {
+    getAlumnosByCurso(nombreCurso: string): Observable<ALUMNOS[]> {
       return this.httpClient.get<ALUMNOS[]>(environment.baseAPIURL + '/alumnos').pipe(
         map(alumnos =>
-          alumnos
-            .filter(alumno => alumno.clases?.some(clase => clase.nombreCurso === nombreCurso))
-            .map(alumno => alumno.nombre)
+          alumnos.filter(alumno => alumno.clases?.some(clase => clase.nombreCurso === nombreCurso))
         )
       );
     }
+
 
 }

@@ -1,38 +1,36 @@
-/* Añade estilos si es necesario */
-.table-container {
-  max-height: 400px;
-  overflow: auto;
-}
-
-table {
+.dialog-container {
+  max-width: 600px;
   width: 100%;
-  margin-top: 20px;
-}
-
-.mat-header-cell {
-  background-color: #3f51b5;
-  color: white;
-  font-weight: bold;
-}
-
-.mat-cell {
-  padding: 8px 16px;
-}
-
-.mat-elevation-z8 {
+  padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
 }
 
-.mat-dialog-title {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  margin: 0;
   font-size: 24px;
-  font-weight: bold;
-  color: #3f51b5;
+  color: #333;
 }
 
-.mat-dialog-content {
+.content {
+  margin-top: 10px;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.no-alumnos-message {
+  margin: 0;
+  padding: 10px;
   font-size: 16px;
-}
-
-.mat-dialog-actions {
-  justify-content: flex-end;
+  color: #777;
 }

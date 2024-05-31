@@ -6,6 +6,8 @@ import { ListaAlumnosComponent } from './components/lista-alumnos/lista-alumnos.
 import Swal from 'sweetalert2';
 import { clasesService } from '../../../../core/services/clases.service';
 import { AlumnosService } from '../../../../core/services/alumnos.service';
+import { ALUMNOS} from '../../../../layouts/dashboard/pages/students/models';
+
 
 import { AuthService } from '../../../../core/services/auth.service';
 import { Observable, Subscription, map } from 'rxjs';
@@ -35,7 +37,7 @@ export class ClasesComponent {
   isAdmin: boolean = false;
 
   clases: CLASES[] = [];
-  alumnosByCurso: string[] = [];
+  alumnosByCurso: ALUMNOS[] = [];
 
   constructor(private matDialog: MatDialog,
     private AlumnosService: AlumnosService,
@@ -101,24 +103,15 @@ getClases(): void {
   });
 }
 
-mostrarAlumnosEnSweetAlert(nombreCurso: string) {
-  Swal.fire({
-    title: 'Alumnos en el curso de ' + nombreCurso,
-    html: `<ul>${this.alumnosByCurso.map(nombre => `<li>${nombre}</li>`).join('')}</ul>`,
-    icon: 'info',
-    confirmButtonText: 'OK'
-  });
-}
-
-
 onListaAlumnos(nombreCurso: string): void {
-  this.AlumnosService.getAlumnosByCurso(nombreCurso).subscribe((nombres) => {
-    this.alumnosByCurso = nombres;
+  this.AlumnosService.getAlumnosByCurso(nombreCurso).subscribe((alumnos) => {
+    this.alumnosByCurso = alumnos;
     this.dialog.open(ListaAlumnosComponent, {
       data: {
-        alumnos: nombres
+        alumnos: alumnos
       }
     });
+    console.log(alumnos)
   });
 }
 
