@@ -6,6 +6,7 @@ export interface AuthState {
   username: string | null;
   rol: string | null;
   avatar: string | null;
+  isgoogle: boolean;
 }
 
 export const initialAuthState: AuthState = {
@@ -13,6 +14,7 @@ export const initialAuthState: AuthState = {
   username: null,
   rol: null,
   avatar: null,
+  isgoogle: false,
 };
 
 export const authFeatureName = 'auth';
@@ -22,6 +24,7 @@ export const authReducer = createReducer(
   on(authActions.login, (state, { username, rol, avatar}) => ({
     ...state,
     isLoggedIn: true,
+    isgoogle: false,
     username,
     rol,
     avatar
@@ -31,6 +34,7 @@ export const authReducer = createReducer(
     isLoggedIn: false,
     username: null,
     rol: null,
-    avatar: null
+    avatar: null,
+    isgoogle: false,
   }))
 );

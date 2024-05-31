@@ -66,27 +66,21 @@ export class CursosComponent {
         next: (result) => {
           if (result) {
             if (editingUser) {
-              this.CursosService.updateCurso(editingUser.id, result).subscribe({
-                next: (data) => {
-                  this.Cursos.push(data);
-                  //this.getCursos();
-                },
-              });
+              this.store.dispatch(
+                CursoActions.updateCurso({
+                  id: editingUser.id,
+                  payload: result,
+                })
+              );
             } else {
-              this.CursosService.createCurso(result).subscribe({
-                next: (data) => {
-                  this.Cursos.push(data);
-                  //this.getCursos();
-                },
-
-              });
+              this.store.dispatch(
+                CursoActions.createCurso({ payload: result })
+              );
             }
           }
         },
       });
   }
-
-
 
   onDeleteUser(id: string): void {
     Swal.fire({
@@ -115,7 +109,6 @@ export class CursosComponent {
   }
 
   onListaAlumnos(id: string): void {
-
   }
 
   getPageNumbers(): number[] {

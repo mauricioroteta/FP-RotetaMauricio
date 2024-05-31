@@ -35,7 +35,7 @@
       </button>
 
       <button mat-raised-button routerLink="/clases" class="boton-con-efecto" *ngIf="!isMobile()">
-        <mat-icon>book</mat-icon>
+        <mat-icon>library_books</mat-icon>
         Clases
       </button>
       <button mat-raised-button routerLink="/clases" class="boton-con-efecto" *ngIf="isMobile()">
@@ -85,21 +85,27 @@
           </div>
 
 
-         <mat-menu #menuUsuario="matMenu">
-          <div *ngIf="(isLogin$ | async)">
-            <p class="usuario-info">{{ this.userLogin$ | async}} ({{ this.rolLogin$ | async}})</p>
-          </div>
-            <mat-divider></mat-divider>
-            <!-- <button mat-menu-item (click)="usrInfo()">
-              <mat-icon>person_edit</mat-icon>
-              <span>Ver Perfil</span>
-            </button>
-            <mat-divider></mat-divider> -->
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>exit_to_app</mat-icon>
-              <span>Cerrar sesión</span>
-            </button>
+          <mat-menu #menuUsuario="matMenu" class="custom-menu">
+            <ng-container *ngIf="isLogin$ | async as isLogin">
+              <div class="menu-header" *ngIf="isLogin">
+                <mat-card class="user-card">
+                  <mat-card-header>
+                    <div mat-card-avatar class="avatar">
+                      <img class="imagen-usuario" [src]="this.avatar" alt="Usuario"/>
+                    </div>
+                    <mat-card-title>{{ userName }}</mat-card-title>
+                    <mat-card-subtitle>{{ rolLogin$ | async }}</mat-card-subtitle>
+                  </mat-card-header>
+                </mat-card>
+              </div>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Cerrar sesión</span>
+              </button>
+            </ng-container>
           </mat-menu>
+
 
         </div>
       </mat-toolbar>

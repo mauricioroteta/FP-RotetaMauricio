@@ -1,16 +1,15 @@
 {
   "users": [
     {
-      "id": "1",
       "userName": "maurote",
+      "password": "maurote",
       "nombre": "Mauricio",
       "apellido": "Roteta",
-      "telefono": "2983507502",
       "email": "mauricioroteta@gmail.com.ar",
-      "activo": true,
+      "telefono": "2983507502",
       "avatar": "https://cdn-icons-png.flaticon.com/128/3682/3682356.png",
       "rol": "user",
-      "password": "maurote"
+      "id": "1"
     },
     {
       "id": "2",
@@ -48,20 +47,20 @@
         {
           "idClass": "1",
           "nombreCurso": "Angular",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 4,
+          "puntos": 40
         },
         {
           "idClass": "2",
           "nombreCurso": "Fundamentos del Diseño Gráfico",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 3,
+          "puntos": 30
         },
         {
           "idClass": "3",
           "nombreCurso": "Python",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 6,
+          "puntos": 60
         }
       ],
       "id": "1"
@@ -77,8 +76,8 @@
         {
           "idClass": "3",
           "nombreCurso": "Python",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 1,
+          "puntos": 5
         }
       ],
       "id": "2"
@@ -98,13 +97,13 @@
         },
         {
           "idClass": "2",
-          "clasesPresente": 1,
-          "puntos": 30
+          "clasesPresente": 8,
+          "puntos": 70
         },
         {
           "idClass": 3,
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 4,
+          "puntos": 40
         }
       ],
       "id": "3"
@@ -125,7 +124,7 @@
         },
         {
           "idClass": "2",
-          "clasesPresente": 1,
+          "clasesPresente": 2,
           "puntos": 30
         }
       ]
@@ -145,10 +144,16 @@
         },
         {
           "idClass": 2,
+          "clasesPresente": 10,
+          "puntos": 100
+        },
+        3,
+        {
+          "idClass": "ea1e",
+          "nombreCurso": "Canva",
           "clasesPresente": 0,
           "puntos": 0
-        },
-        3
+        }
       ],
       "id": "5"
     },
@@ -162,8 +167,8 @@
       "clases": [
         {
           "idClass": "1",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 7,
+          "puntos": 70
         }
       ],
       "id": "6"
@@ -208,8 +213,8 @@
       "clases": [
         {
           "idClass": "1",
-          "clasesPresente": 0,
-          "puntos": 0
+          "clasesPresente": 2,
+          "puntos": 30
         }
       ],
       "id": "10"

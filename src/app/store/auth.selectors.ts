@@ -6,3 +6,4 @@ export const authIsLogin = createSelector(authState, (state) => state.isLoggedIn
 export const authUserLogin = createSelector(authState, (state) => state.username);
 export const authRolLogin = createSelector(authState, (state) => state.rol);
 export const authAvatarLogin = createSelector(authState, (state) => state.avatar);
+export const authGoogleLogin = createSelector(authState, (state) => state.isgoogle);

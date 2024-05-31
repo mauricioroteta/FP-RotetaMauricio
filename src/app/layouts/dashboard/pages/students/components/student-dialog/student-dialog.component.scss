@@ -55,69 +55,67 @@
   padding-bottom: 50px;
 }
 
-/* app.component.css */
+.main-card {
+  padding: 16px;
+}
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; /* Espacio entre las tarjetas */
-  justify-content: center; /* Centrar las tarjetas */
+  gap: 16px;
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 16px);
+  box-sizing: border-box;
 }
 
 .custom-card {
-  width: 100%;
-  border-radius: 8px; /* Bordes redondeados */
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Animaciones de transición */
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .custom-card:hover {
-  transform: translateY(-5px); /* Elevar la tarjeta al pasar el cursor */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada al pasar el cursor */
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-mat-card-header {
-  background-color: #f5f5f5; /* Color de fondo del encabezado */
-  border-bottom: 1px solid #000000; /* Borde inferior del encabezado */
-  border-radius: 8px 8px 0 0; /* Bordes redondeados en la parte superior */
-}
-
-mat-card-title {
-  font-size: 1.2em; /* Tamaño de la fuente del título */
-  font-weight: bold; /* Negrita */
-}
-
-mat-card-content p {
-  margin: 0.5em 0; /* Márgenes en el contenido */
-}
-
-mat-card-content {
+.course-icon {
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
-mat-card-actions {
-  display: flex;
-  justify-content: flex-end; /* Alinear el botón a la derecha */
-}
-.card {
-  flex: 1; /* La tarjeta toma todo el espacio disponible en el contenedor */
-  height: 200px; /* Establece el alto de la tarjeta en 200px */
-  /* Otros estilos de la tarjeta */
-}
 .progress-container {
-  width: 100%;
-  background-color: #f0f0f0; /* Fondo de la barra de progreso */
+  background-color: #e0e0e0;
   border-radius: 4px;
-  overflow: hidden; /* Asegura que la barra no se salga de los bordes */
-  margin-top: 4px; /* Espacio arriba de la barra de progreso */
-  margin-bottom: 8px; /* Espacio debajo de la barra de progreso */
-  height: 8px; /* Altura de la barra de progreso */
+  overflow: hidden;
+  height: 8px;
+  margin-top: 8px;
 }
 
 .progress-bar {
+  background-color: #3f51b5;
   height: 100%;
-  background-color: #3f51b5; /* Color de la barra de progreso */
-  width: 0; /* Inicialmente la barra está a 0% */
-  transition: width 2s ease-out; /* Animar el ancho de la barra en 2 segundos */
-  border-radius: 4px 0 0 4px; /* Bordes redondeados en el lado izquierdo */
+  transition: width 0.3s;
+}
+
+.progress-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #757575;
+}
+
+mat-card-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+mat-card-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #424242;
 }
