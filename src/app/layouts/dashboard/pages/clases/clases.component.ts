@@ -111,7 +111,6 @@ onListaAlumnos(nombreCurso: string): void {
         alumnos: alumnos
       }
     });
-    console.log(alumnos)
   });
 }
 
